@@ -15,5 +15,5 @@ SELECT
 FROM {{ source('demo_src', 'bookings') }}
 
 {% if is_incremental() %}
-WHERE 'Ox' || book_ref::bigint > (SELECT MAX('Ox' || book_ref::bigint) FROM {{ this }})
+  WHERE book_ref::bigint > (SELECT MAX(book_ref::bigint) FROM {{ this }})
 {% endif %}
