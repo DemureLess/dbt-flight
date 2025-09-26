@@ -1,0 +1,24 @@
+{
+    "python.defaultInterpreterPath": "/Users/pavel/Documents/dbt/dbt-env/bin/python",
+    "python.terminal.activateEnvironment": true,
+    "terminal.integrated.env.osx": {
+      "PATH": "/Users/pavel/Documents/dbt/dbt-env/bin:${env:PATH}",
+      "VIRTUAL_ENV": "/Users/pavel/Documents/dbt/dbt-env"
+    },
+    "terminal.integrated.profiles.osx": {
+      "dbt-env": {
+        "path": "/bin/zsh",
+        "overrideCommand": true,
+        "args": [
+          "-c",
+          "export CONDA_AUTO_ACTIVATE_BASE=false; source /Users/pavel/Documents/dbt/dbt-env/bin/activate; exec zsh"
+        ],
+        "icon": "terminal"
+      }
+    },
+    "terminal.integrated.defaultProfile.osx": "dbt-env",
+    "terminal.integrated.env.osx.CONDA_AUTO_ACTIVATE_BASE": "false",
+    "dbtPowerUser.dbtInstallation": "custom",
+    "dbtPowerUser.customDbtPath": "/Users/pavel/Documents/dbt/dbt-env/bin/dbt",
+    "dbt.perspectiveTheme": "Vintage"
+  }
