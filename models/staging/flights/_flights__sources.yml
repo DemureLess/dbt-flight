@@ -32,7 +32,7 @@ sources:
             count: 6
             period: hour
           error_after:
-            count: 1
+            count: 100000
             period: day
-          filter: 'current_date::date - book_date::date < 30000'
+          filter: 'current_date - book_date::date < 30000'
 

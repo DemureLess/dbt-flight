@@ -1,0 +1,39 @@
+models:
+  - name: fct_bookings
+    description: "Факты бронирования"
+    docs:
+      show: true
+      node_color: '#000000'
+    latest_version: 1
+    versions:
+      - v: 1
+    access: protected
+    config:
+      contract:
+        enforced: true
+    meta:
+      owner: "Pavel Romanovskiy"
+      contact_tg: "@demureless"
+      status: "in development"
+
+    columns:
+      - name: book_ref
+        data_type: varchar(8)
+        description: 'Номер бронирования'
+        constraints:
+          - type: not_null
+      - name: book_date
+        data_type: timestamptz
+        description: 'Дата бронирования'
+      - name: total_amount
+        data_type: numeric(10, 2)
+        description: 'Сумма бронирования'
+        constraints:
+          - type: check
+            name: total_amount_non_negative
+            expression: 'total_amount > 0'
+        tests:
+          - not_null
+        meta:
+          owner: "finance department"
+        quote: false
