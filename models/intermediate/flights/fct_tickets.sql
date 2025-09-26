@@ -4,12 +4,12 @@
 )
 }}
 
-select ticket_no,
-       book_ref,
-       passenger_id,
-       passenger_name,
-       contact_data
-from {{ ref('stg_flights__tickets') }}
-join {{ ref('stg_flights__flights') }} on {{ ref('stg_flights__tickets') }}.flight_id = {{ ref('stg_flights__flights') }}.flight_id
+SELECT
+  ticket_no,
+  book_ref,
+  passenger_id,
+  passenger_name,
+  contact_data
+FROM {{ ref('stg_flights__tickets') }}
+WHERE passenger_id::text NOT IN (SELECT passenger_id::text FROM {{ ref('stg_dict_passenger_company') }})
 
-    

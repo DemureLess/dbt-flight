@@ -1,0 +1,22 @@
+[sqlfluff]
+dialect = postgres
+templater = dbt
+max_line_length = 120
+exclude_rules = L009,L031
+
+[sqlfluff:templater:dbt]
+project_dir = .
+profiles_dir = /Users/pavel/.dbt
+
+[sqlfluff:indentation]
+tab_space_size = 2
+indent_unit = space
+
+[sqlfluff:rules:capitalisation.keywords]
+capitalisation_policy = upper
+
+[sqlfluff:rules:capitalisation.identifiers]
+extended_capitalisation_policy = lower
+
+[sqlfluff:rules:layout.long_lines]
+max_line_length = 120

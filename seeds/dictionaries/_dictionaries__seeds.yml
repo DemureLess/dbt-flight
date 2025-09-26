@@ -1,0 +1,12 @@
+seeds:
+  - name: city_region
+    description: 'City and region'
+    config:
+      column_types:
+        city: varchar(59)
+        region: varchar(59)
+    columns:
+      - name: city
+        tests:
+          - not_null
+          - unique

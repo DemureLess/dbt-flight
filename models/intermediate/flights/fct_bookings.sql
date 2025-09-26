@@ -4,9 +4,9 @@
 )
 }}
 
-select book_ref,
-       book_date,
-       total_amount
-from {{ ref('stg_flights__bookings') }}
+SELECT
+  book_ref,
+  book_date,
+  total_amount
+FROM {{ ref('stg_flights__bookings') }}
 
-    
