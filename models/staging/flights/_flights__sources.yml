@@ -1,0 +1,38 @@
+sources:
+  - name: demo_src
+    description: 'Demo BD airflight'
+    database: dwh_flight
+    schema: demo_src
+    tables:
+      - name: aircrafts
+        description: 'Самолеmы'
+        columns:
+          - name: aircraft_code
+            description: 'Код самолета'
+            tests:
+              - not_null
+              - unique
+      - name: airports
+        description: 'Аэропорты'
+
+      - name: flights
+        description: 'Рейсы'
+      - name: routes
+        description: 'Маршруты'
+      - name: seats 
+        description: 'Места'
+      - name: tickets
+        description: 'Билеты'
+
+      - name: bookings
+        description: 'Бронирования'
+        loaded_at_field: book_date
+        freshness:
+          warn_after:
+            count: 6
+            period: hour
+          error_after:
+            count: 1
+            period: day
+          filter: 'current_date::date - book_date::date < 30000'
+
