@@ -5,8 +5,21 @@ seeds:
       column_types:
         city: varchar(59)
         region: varchar(59)
+        updated_at: timestamptz
     columns:
       - name: city
+        tests:
+          - not_null
+          - unique
+
+
+  - name: passenger_company
+    description: 'Passenger company'
+    config:
+      column_types:
+        passenger_id: varchar(59)
+    columns:
+      - name: passenger_id
         tests:
           - not_null
           - unique
