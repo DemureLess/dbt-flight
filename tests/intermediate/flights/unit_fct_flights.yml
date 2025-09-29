@@ -1,0 +1,46 @@
+unit_tests:
+  - name: test_fct_flights
+    description: "Время фактического вылета вместо запланированного. В поле запланированного должно быть положительное значение"
+    model: fct_flights
+    given:
+      - input: ref('stg_flights__flights')
+        rows:
+          - { scheduled_departure: "2025-01-01T10:00:00", actual_departure: "2025-01-01T10:02:00" }
+    expect:
+      rows:
+        - { scheduled_departure: "2025-01-01T10:00:00", actual_departure: "2025-01-01T10:02:00", flight_departure_delay: "00:02:00" }
+
+  - name: test_fct_flights_equal
+    description: "Время фактического вылета вместо запланированного. В поле запланированного должно быть положительное значение"
+    model: fct_flights
+    given:
+      - input: ref('stg_flights__flights')
+        rows:
+          - { scheduled_departure: "2025-01-01T10:00:00", actual_departure: "2025-01-01T10:00:00" }
+    expect:
+      rows:
+        - { scheduled_departure: "2025-01-01T10:00:00", actual_departure: "2025-01-01T10:00:00", flight_departure_delay: "00:00:00" }
+
+  - name: test_fct_flights_less
+    description: "Время фактического вылета вместо запланированного. В поле запланированного должно быть положительное значение"
+    model: fct_flights
+    given:
+      - input: ref('stg_flights__flights')
+        rows:
+          - { scheduled_departure: "2025-01-01T10:01:00", actual_departure: "2025-01-01T10:00:00" }
+    expect:
+      rows:
+        - { scheduled_departure: "2025-01-01T10:01:00", actual_departure: "2025-01-01T10:00:00", flight_departure_delay: "00:00:00" }
+
+  - name: test_fct_flights_null
+    description: "Время фактического вылета вместо запланированного. В поле запланированного должно быть положительное значение"
+    model: fct_flights
+    given:
+      - input: ref('stg_flights__flights')
+        format: csv
+        rows: |
+          scheduled_departure,actual_departure
+          2025-01-01T10:01:00,
+    expect:
+      rows:
+        - { scheduled_departure: "2025-01-01T10:01:00", actual_departure: null, flight_departure_delay: "00:00:00" }

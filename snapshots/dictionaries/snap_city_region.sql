@@ -6,11 +6,9 @@
             strategy = 'timestamp',
             unique_key = ['city'],
             updated_at = 'updated_at',
-            dbt_valid_to_current = "'9999-12-31'::date",
+            invalidate_hard_deletes = true,
 
-            hard_delete = "new_record",
-
-            snapshot_meta_column_name={
+            snapshot_meta_column_names={
                 "dbt_is_deleted": "dbt_is_deleted"
             }
         )
