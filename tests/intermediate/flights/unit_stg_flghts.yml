@@ -1,0 +1,32 @@
+unit_tests:
+  - name: unit_stg_flghts_append_1_row
+    description: "Одна новая строка должна подгрузиться с бук реф больше чем есть в базе"
+    model: stg_flights__bookings_append
+    overrides:
+      macros:
+        is_incremental: true
+    given:
+      - input: source('demo_src', 'bookings')
+        rows:
+          - { book_ref: '00001F', book_date: '2017-01-02T00:00:00' }
+      - input: this
+        rows:
+          - { book_ref: '00000F', book_date: '2017-01-01T00:00:00' }
+    expect:
+      rows:
+        - { book_ref: '00001F', book_date: '2017-01-02T00:00:00'}
+
+
+  - name: unit_stg_flghts_append_1_row_all
+    description: "Первая загрузка должна подгрузить все строки"
+    model: stg_flights__bookings_append
+    overrides:
+      macros:
+        is_incremental: false
+    given:
+      - input: source('demo_src', 'bookings')
+        rows:
+          - { book_ref: '00001F', book_date: '2017-01-02T00:00:00' }
+    expect:
+      rows:
+        - { book_ref: '00001F', book_date: '2017-01-02T00:00:00'}
